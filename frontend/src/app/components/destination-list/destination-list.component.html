@@ -1,0 +1,10 @@
+<ng-container *ngIf="list.length; else noData">
+  <app-destination-card
+    *ngFor="let d of list"
+    [data]="d">
+  </app-destination-card>
+</ng-container>
+
+<ng-template #noData>
+  <p>Keine Empfehlungen – bitte Formular ausfüllen.</p>
+</ng-template>
