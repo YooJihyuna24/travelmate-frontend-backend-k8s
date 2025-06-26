@@ -1,4 +1,4 @@
 export interface Destination {
-  destination: string;
+  name: string;
   budget: string;
 }
