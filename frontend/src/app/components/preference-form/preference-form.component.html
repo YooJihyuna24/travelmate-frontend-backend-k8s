@@ -1,25 +1,28 @@
-<form (ngSubmit)="onSubmit()" #f="ngForm">
-  <label>
-    Temperatur:
-    <select name="temperature" [(ngModel)]="pref.temperature" required>
-      <option value="warm">warm</option>
-      <option value="kalt">kalt</option>
-    </select>
-  </label>
+<h2>Reiseempfehlung</h2>
 
-  <label>
-    Reisedauer (Tage):
-    <input type="number" name="duration" [(ngModel)]="pref.duration" required min="1">
-  </label>
+<label>Temperatur:
+  <select [(ngModel)]="preference.temperature">
+    <option value="warm">warm</option>
+    <option value="cold">kalt</option>
+  </select>
+</label>
 
-  <label>
-    Budget:
-    <select name="budget" [(ngModel)]="pref.budget" required>
-      <option value="low">low</option>
-      <option value="medium">medium</option>
-      <option value="high">high</option>
-    </select>
-  </label>
+<br />
 
-  <button type="submit" [disabled]="f.invalid">Empfehlung holen</button>
-</form>
+<label>Reisedauer (Tage):
+  <input type="number" [(ngModel)]="preference.duration" min="1" />
+</label>
+
+<br />
+
+<label>Budget:
+  <select [(ngModel)]="preference.budget">
+    <option value="low">low</option>
+    <option value="medium">medium</option>
+    <option value="high">high</option>
+  </select>
+</label>
+
+<br />
+
+<button (click)="submitForm()">Empfehlung holen</button>

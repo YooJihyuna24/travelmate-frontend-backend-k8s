@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Preference } from '../../models/preference';
@@ -10,10 +10,15 @@ import { Preference } from '../../models/preference';
   templateUrl: './preference-form.component.html'
 })
 export class PreferenceFormComponent {
-  pref: Preference = { temperature: 'warm', duration: 1, budget: 'low' };
-  @Output() submitted = new EventEmitter<Preference>();
+  preference: Preference = {
+    temperature: 'warm',
+    duration: 7,
+    budget: 'medium'
+  };
 
-  onSubmit() {
-    this.submitted.emit(this.pref);
+  @Output() preferenceSubmitted = new EventEmitter<Preference>();
+
+  submitForm() {
+    this.preferenceSubmitted.emit(this.preference);
   }
 }
