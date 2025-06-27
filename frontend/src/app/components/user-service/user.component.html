@@ -1,0 +1,24 @@
+<h2>User Registration / Login</h2>
+<input [(ngModel)]="username" placeholder="Username" />
+<input [(ngModel)]="password" placeholder="Password" type="password" />
+<button (click)="register()">Register</button>
+<button (click)="login()">Login</button>
+
+<p *ngIf="message">{{ message }}</p>
+
+<hr>
+<h3>Save Favorite Places (comma separated):</h3>
+<input [(ngModel)]="places" placeholder="Paris,London" (ngModelChange)="places = $event.split(',')" />
+<button (click)="savePlaces()">Save Places</button>
+
+<hr>
+<h3>Your Places:</h3>
+<ul>
+  <li *ngFor="let place of userPlaces">{{ place }}</li>
+</ul>
+
+<hr>
+<button (click)="fetchUsers()">Show All Users</button>
+<ul>
+  <li *ngFor="let user of users">{{ user }}</li>
+</ul>

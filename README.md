@@ -82,6 +82,6 @@ kubectl port-forward svc/recommender-service 5002:80
 
 Frontend UI: http://localhost:4200
 
-User Service API: http://localhost:5001
+User Service API: http://localhost:5001/users
 
 Recommender Service API: http://localhost:5002
