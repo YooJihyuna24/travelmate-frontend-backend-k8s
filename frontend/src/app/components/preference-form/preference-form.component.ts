@@ -1,15 +1,24 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Preference } from '../../models/preference';
 
 @Component({
   selector: 'app-preference-form',
-  templateUrl: './preference-form.component.html',
-  styleUrls: ['./preference-form.component.scss']
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './preference-form.component.html'
 })
 export class PreferenceFormComponent {
-  pref: Preference = { temperature: 'warm', duration: 1, budget: 'low' };
-  @Output() submitted = new EventEmitter<Preference>();
-  onSubmit() {
-    this.submitted.emit(this.pref);
+  preference: Preference = {
+    temperature: 'warm',
+    duration: 7,
+    budget: 'medium'
+  };
+
+  @Output() preferenceSubmitted = new EventEmitter<Preference>();
+
+  submitForm() {
+    this.preferenceSubmitted.emit(this.preference);
   }
 }

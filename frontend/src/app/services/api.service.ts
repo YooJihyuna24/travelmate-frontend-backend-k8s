@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Preference } from '../models/preference';
 import { Destination } from '../models/destination';
-import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private base = environment.apiBaseUrl;
   constructor(private http: HttpClient) {}
-  savePreferences(pref: Preference): Observable<any> {
-    return this.http.post(`${this.base}/users`, pref);
+
+  getRecommendations(): Observable<any> {
+    return this.http.get(`${environment.recommenderApiBaseUrl}/recommendations`);
   }
-  getRecommendations(pref: Preference): Observable<Destination[]> {
-    return this.http.post<Destination[]>(`${this.base}/recommendations`, pref);
+
+  getUsers(): Observable<any> {
+    return this.http.get(`${environment.userApiBaseUrl}/users`);
+  }
+
+  // NEU: Post Recommendations mit User-Preferences
+  postRecommendations(pref: Preference): Observable<Destination[]> {
+    return this.http.post<{ recommendations: Destination[] }>(
+      `${environment.recommenderApiBaseUrl}/recommendations`,
+      pref
+    ).pipe(map(response => response.recommendations));
   }
 }

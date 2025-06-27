@@ -1,27 +1,33 @@
 import { Component } from '@angular/core';
-import { ApiService } from './services/api.service';
+import { CommonModule } from '@angular/common';
+import { PreferenceFormComponent } from './components/preference-form/preference-form.component';
+import { DestinationListComponent } from './components/destination-list/destination-list.component';
+import { DestinationCardComponent } from './components/destination-card/destination-card.component';
 import { Preference } from './models/preference';
 import { Destination } from './models/destination';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, PreferenceFormComponent, DestinationListComponent, DestinationCardComponent],
   templateUrl: './app.component.html',
-  styleUrls:   ['./app.component.scss']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // Hier sammeln wir die Rückgabe des Recommender-Services
   destinations: Destination[] = [];
 
-  // ApiService injizieren
-  constructor(private api: ApiService) {}
+  constructor(private apiService: ApiService) {}
 
-  // Wird aufgerufen, wenn das Preference-Form seine Daten submitted
   onPref(pref: Preference) {
-    // Erst Nutzerdaten speichern (dummy / simuliert)
-    this.api.savePreferences(pref).subscribe(() => {
-      // Dann Empfehlungen abfragen und in destinations speichern
-      this.api.getRecommendations(pref)
-        .subscribe(res => this.destinations = res);
-    });
-  }
+  this.apiService.postRecommendations(pref).subscribe({
+    next: (data) => {
+      this.destinations = data;
+    },
+    error: (err) => {
+      console.error('Fehler beim Laden der Empfehlungen:', err);
+    }
+  });
+}
+
 }

@@ -1,5 +1,5 @@
 export interface Preference {
-  temperature: 'warm' | 'kalt';
+  temperature: 'warm' | 'cold';
   duration: number;
   budget: 'low' | 'medium' | 'high';
 }

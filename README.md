@@ -53,17 +53,17 @@ Refer to README in backend/ and recommender/ folders for details on running loca
 Replace <dockerhub-username> with your Docker Hub username:
 
 ```bash
-# Frontend thilofritz
-docker build -t thilofritz/frontend:latest ./frontend-service
-docker push thilofritz/frontend:latest
+# Frontend
+docker build -t <dockerhub-username>/frontend:latest ./frontend
+docker push <dockerhub-username>/frontend:latest
 
 # User Service (Backend)
-docker build -t thilofritz/user-service:latest ./user-service
-docker push thilofritz/user-service:latest
+docker build -t <dockerhub-username>/user-service:latest ./backend
+docker push <dockerhub-username>/user-service:latest
 
 # Recommender Service
-docker build -t thilofritz/recommender-service:latest ./recommender-service
-docker push thilofritz/recommender-service:latest
+docker build -t <dockerhub-username>/recommender-service:latest ./recommender
+docker push <dockerhub-username>/recommender-service:latest
 ```
 
 ## Deploying to Kubernetes
