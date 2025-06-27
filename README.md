@@ -65,7 +65,7 @@ docker push <dockerhub-username>/user-service:latest
 docker build -t <dockerhub-username>/recommender-service:latest ./recommender
 docker push <dockerhub-username>/recommender-service:latest
 ```
-
+kubectl rollout restart deployment frontend
 ## Deploying to Kubernetes
 
 ```bash
