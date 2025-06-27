@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from 'frontend\src\app\components\user-service\user.component.ts';
+import { ApiService } from 'frontend\src\app\services\api.service';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +13,7 @@ export class UserComponent {
   users: string[] = [];
   message = '';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: ApiService) {}
 
   register() {
     this.userService.register(this.username, this.password).subscribe({
