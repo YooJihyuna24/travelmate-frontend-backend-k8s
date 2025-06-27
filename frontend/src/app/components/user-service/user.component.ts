@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { UserService } from '../user-service/user.service';
 
 @Component({
   selector: 'app-user',
@@ -17,44 +17,44 @@ export class UserComponent {
 
   register() {
     this.userService.register(this.username, this.password).subscribe({
-      next: res => this.message = res.message,
-      error: err => this.message = err.error.error
+      next: (res: any) => this.message = res.message,
+      error: (err: any) => this.message = err.error.error
     });
   }
 
   login() {
     this.userService.login(this.username, this.password).subscribe({
-      next: res => {
+      next: (res: any) => {
         this.message = res.message;
         this.fetchPlaces();
       },
-      error: err => this.message = err.error.error
+      error: (err: any) => this.message = err.error.error
     });
   }
 
   fetchUsers() {
     this.userService.getUsers().subscribe({
-      next: res => this.users = res.users,
-      error: err => this.message = err.error.error
+      next: (res: any) => this.users = res.users,
+      error: (err: any) => this.message = err.error.error
     });
   }
 
   fetchPlaces() {
     if (!this.username) return;
     this.userService.getPlaces(this.username).subscribe({
-      next: res => this.userPlaces = res.places,
-      error: err => this.message = err.error.error
+      next: (res: any) => this.userPlaces = res.places,
+      error: (err: any) => this.message = err.error.error
     });
   }
 
   savePlaces() {
     if (!this.username) return;
     this.userService.savePlaces(this.username, this.places).subscribe({
-      next: res => {
+      next: (res: any) => {
         this.message = res.message;
         this.fetchPlaces();
       },
-      error: err => this.message = err.error.error
+      error: (err: any) => this.message = err.error.error
     });
   }
 }
