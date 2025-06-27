@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  recommenderApiBaseUrl: 'http://recommender-service:5000',
-  userApiBaseUrl: 'http://user-service'
+  recommenderApiBaseUrl: 'http://localhost:5002',
+  userApiBaseUrl: 'http://localhost:5001'
 };

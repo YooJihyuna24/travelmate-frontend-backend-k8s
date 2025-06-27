@@ -7,17 +7,17 @@ def home():
     return "Hallo Welt!"
 @main.route("/recommendations", methods=["POST"])
 def get_recommendations():
-    data = request.json
+    data = request.get_json(force=True)
     temperature = data.get("temperature")
     duration = data.get("duration")
     budget = data.get("budget")
 
     recommendations = []
     if temperature == "warm":
-        recommendations.append({"location": "Barcelona", "reason": "Warm & cultural", "budget": budget})
+        recommendations.append({"name": "Barcelona", "reason": "Warm & cultural", "budget": budget})
     elif temperature == "cold":
-        recommendations.append({"location": "Reykjavik", "reason": "Cold & nature", "budget": budget})
+        recommendations.append({"name": "Reykjavik", "reason": "Cold & nature", "budget": budget})
     if budget == "high":
-        recommendations.append({"location": "Tokyo", "reason": "High-budget adventure", "budget": budget})
+        recommendations.append({"name": "Tokyo", "reason": "High-budget adventure", "budget": budget})
 
     return jsonify({"recommendations": recommendations})

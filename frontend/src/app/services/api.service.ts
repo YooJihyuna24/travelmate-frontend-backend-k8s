@@ -8,14 +8,15 @@ import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
+
   constructor(private http: HttpClient) {}
 
   getRecommendations(): Observable<any> {
-    return this.http.get(`${environment.recommenderApiBaseUrl}/recommendations`);
+    return this.http.get(`${environment.recommenderApiBaseUrl}`);
   }
 
   getUsers(): Observable<any> {
-    return this.http.get(`${environment.userApiBaseUrl}/users`);
+    return this.http.get(`${environment.userApiBaseUrl}`);
   }
 
   // NEU: Post Recommendations mit User-Preferences
