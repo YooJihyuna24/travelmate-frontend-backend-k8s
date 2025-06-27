@@ -46,7 +46,7 @@ npm start
 
 ## Backend & Recommender
 
-Refer to README in backend/ and recommender/ folders for details on running locally.
+Refer to README in user/ and recommender/ folders for details on running locally.
 
 # Building and pushing Docker Images
 
@@ -54,15 +54,20 @@ Replace <dockerhub-username> with your Docker Hub username:
 
 ```bash
 # Frontend
-docker build -t <dockerhub-username>/frontend:latest ./frontend
+cd frontend
+docker build -t <dockerhub-username>/frontend:latest .
 docker push <dockerhub-username>/frontend:latest
 
 # User Service (Backend)
-docker build -t <dockerhub-username>/user-service:latest ./backend
+cd ..
+cd user-service
+docker build -t <dockerhub-username>/user-service:latest .
 docker push <dockerhub-username>/user-service:latest
 
 # Recommender Service
-docker build -t <dockerhub-username>/recommender-service:latest ./recommender
+cd ..
+cd recommender-service
+docker build -t <dockerhub-username>/recommender-service:latest .
 docker push <dockerhub-username>/recommender-service:latest
 ```
 
@@ -70,7 +75,7 @@ docker push <dockerhub-username>/recommender-service:latest
 
 ```bash
 # Apply all manifests:
-kubectl apply -f k8s/
+kubectl apply -f k8s
 # Check pod and service status:
 kubectl get pods
 kubectl get svc
