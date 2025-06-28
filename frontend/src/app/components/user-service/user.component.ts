@@ -6,9 +6,8 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-user-service',
   standalone: true,
-  imports: [CommonModule, FormsModule], // <--- ergänzen!
+  imports: [CommonModule, FormsModule],
   templateUrl: './user.component.html',
-+
 })
 export class UserComponent {
   username = '';
