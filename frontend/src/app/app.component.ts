@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // <-- FormsModule importieren!
+import { FormsModule } from '@angular/forms';
 import { PreferenceFormComponent } from './components/preference-form/preference-form.component';
 import { DestinationListComponent } from './components/destination-list/destination-list.component';
 import { DestinationCardComponent } from './components/destination-card/destination-card.component';
@@ -13,7 +13,7 @@ import { ApiService } from './services/api.service';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule, // <-- FormsModule im imports-Array ergänzen
+    FormsModule, 
     PreferenceFormComponent,
     DestinationListComponent,
     DestinationCardComponent

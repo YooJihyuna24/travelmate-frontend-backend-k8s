@@ -54,8 +54,9 @@ Replace <dockerhub-username> with your Docker Hub username:
 
 ```bash
 # Frontend
-docker build -t <dockerhub-username>/frontend:latest ./frontend
-docker push <dockerhub-username>/frontend:latest
+docker build -t thilofritz/frontend:latest ./frontend
+docker push thilofritz/frontend:latest
+kubectl rollout restart deployment frontend
 
 # User Service (Backend)
 docker build -t <dockerhub-username>/user-service:latest ./backend

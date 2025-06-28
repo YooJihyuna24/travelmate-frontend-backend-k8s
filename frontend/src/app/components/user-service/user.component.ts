@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html'
+  selector: 'app-user-service',
+  standalone: true,
+  imports: [CommonModule, FormsModule], // <--- ergänzen!
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
 export class UserComponent {
   username = '';
