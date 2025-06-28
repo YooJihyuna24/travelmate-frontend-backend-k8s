@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-user-service',
@@ -14,14 +15,17 @@ export class UserComponent {
   password = '';
   places: string[] = [];
   userPlaces: string[] = [];
-  users: string[] = [];
   message = '';
 
-  constructor(private userService: ApiService) {}
+  constructor(private userService: ApiService) {};
+  @Output() loggedIn = new EventEmitter<void>();
 
   register() {
     this.userService.register(this.username, this.password).subscribe({
-      next: (res: any) => this.message = res.message,
+      next: (res: any) => {
+        this.message = res.message;
+        this.loggedIn.emit();
+      },
       error: (err: any) => this.message = err.error.error
     });
   }
@@ -31,14 +35,8 @@ export class UserComponent {
       next: (res: any) => {
         this.message = res.message;
         this.fetchPlaces();
+        this.loggedIn.emit();
       },
-      error: (err: any) => this.message = err.error.error
-    });
-  }
-
-  fetchUsers() {
-    this.userService.getUsers().subscribe({
-      next: (res: any) => this.users = res.users,
       error: (err: any) => this.message = err.error.error
     });
   }

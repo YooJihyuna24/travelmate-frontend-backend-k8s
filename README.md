@@ -56,17 +56,19 @@ Replace <dockerhub-username> with your Docker Hub username:
 # Frontend
 docker build -t thilofritz/frontend:latest ./frontend
 docker push thilofritz/frontend:latest
-kubectl rollout restart deployment frontend
+kubectl rollout restart deployment frontend-deployment
 
 # User Service (Backend)
-docker build -t <dockerhub-username>/user-service:latest ./backend
-docker push <dockerhub-username>/user-service:latest
+docker build -t thilofritz/user-service:latest ./user-service
+docker push thilofritz/user-service:latest
+kubectl rollout restart deployment user-deployment
 
 # Recommender Service
-docker build -t <dockerhub-username>/recommender-service:latest ./recommender
-docker push <dockerhub-username>/recommender-service:latest
+docker build -t thilofritz/recommender-service:latest ./recommender-service
+docker push thilofritz/recommender-service:latest
+kubectl rollout restart deployment recommender-deployment
 ```
-kubectl rollout restart deployment frontend
+
 ## Deploying to Kubernetes
 
 ```bash
@@ -83,6 +85,6 @@ kubectl port-forward svc/recommender-service 5002:80
 
 Frontend UI: http://localhost:4200
 
-User Service API: http://localhost:5001/users
+User Service API: http://localhost:5001
 
 Recommender Service API: http://localhost:5002

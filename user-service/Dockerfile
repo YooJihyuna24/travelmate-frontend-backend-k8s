@@ -10,4 +10,4 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
 
 COPY . .
 
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "run:app"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5001"]

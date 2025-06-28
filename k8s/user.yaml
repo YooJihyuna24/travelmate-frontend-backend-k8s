@@ -26,7 +26,8 @@ spec:
     spec:
       containers:
         - name: user
-          image: yoojihyuna24/user-service:latest
+          image: thilofritz/user-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5001
           resources:

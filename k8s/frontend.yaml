@@ -26,7 +26,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: yoojihyuna24/frontend:latest
+          image: thilofritz/frontend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           resources:

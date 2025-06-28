@@ -28,10 +28,6 @@ export class ApiService {
     return this.http.post(`${environment.userApiBaseUrl}/users/${username}/places`, { places });
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(`${environment.userApiBaseUrl}/users`);
-  }
-
   // Recommendation service methods
   getRecommendations(): Observable<any> {
     return this.http.get(`${environment.recommenderApiBaseUrl}/recommendations`);

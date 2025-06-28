@@ -7,6 +7,7 @@ import { DestinationCardComponent } from './components/destination-card/destinat
 import { Preference } from './models/preference';
 import { Destination } from './models/destination';
 import { ApiService } from './services/api.service';
+import { UserComponent } from './components/user-service/user.component';
 
 @Component({
   selector: 'app-root',
@@ -16,22 +17,29 @@ import { ApiService } from './services/api.service';
     FormsModule, 
     PreferenceFormComponent,
     DestinationListComponent,
-    DestinationCardComponent
+    DestinationCardComponent,
+    UserComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   destinations: Destination[] = [];
+  isLoggedIn = false;
 
   constructor(private apiService: ApiService) {}
 
+  onLoggedIn() { 
+    this.isLoggedIn = true;
+  }
+  
+  
   onPref(pref: Preference) {
     this.apiService.postRecommendations(pref).subscribe({
       next: (data) => {
         this.destinations = data;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Fehler beim Laden der Empfehlungen:', err);
       }
     });
