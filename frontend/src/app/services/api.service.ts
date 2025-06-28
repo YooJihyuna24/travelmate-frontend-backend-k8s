@@ -7,23 +7,24 @@ import { Destination } from '../models/destination';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
+
 export class ApiService {
   constructor(private http: HttpClient) {}
 
   // *** User-Service Endpunkte ***
-  registerUser(username: string, password: string): Observable<any> {
+  register(username: string, password: string): Observable<any> {
     return this.http.post(`${environment.userApiBaseUrl}/users/register`, { username, password });
   }
 
-  loginUser(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<any> {
     return this.http.post(`${environment.userApiBaseUrl}/users/login`, { username, password });
   }
 
-  getUserPlaces(username: string): Observable<any> {
+  getPlaces(username: string): Observable<any> {
     return this.http.get(`${environment.userApiBaseUrl}/users/${username}/places`);
   }
 
-  saveUserPlaces(username: string, places: string[]): Observable<any> {
+  savePlaces(username: string, places: string[]): Observable<any> {
     return this.http.post(`${environment.userApiBaseUrl}/users/${username}/places`, { places });
   }
 

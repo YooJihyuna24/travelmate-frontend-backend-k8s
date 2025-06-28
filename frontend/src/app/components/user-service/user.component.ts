@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule], // <--- ergänzen!
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
++
 })
 export class UserComponent {
   username = '';
