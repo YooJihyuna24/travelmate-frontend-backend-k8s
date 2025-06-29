@@ -1,10 +1,10 @@
 <h1>Reiseempfehlung</h1>
 <app-user-service 
   *ngIf="!isLoggedIn"
-  (loggedIn)="onLoggedIn()">
+  (loggedIn)="onLoggedIn($event)">
 </app-user-service>
 
 <div *ngIf="isLoggedIn">
-  <app-preference-form (preferenceSubmitted)="onPref($event)"></app-preference-form>
+  <app-preference-form [username] = "username" (preferenceSubmitted)="onPref($event)"></app-preference-form>
   <app-destination-list [list]="destinations"></app-destination-list>
 </div>

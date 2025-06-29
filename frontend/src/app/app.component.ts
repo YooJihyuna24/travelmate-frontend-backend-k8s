@@ -23,16 +23,18 @@ import { UserComponent } from './components/user-service/user.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   destinations: Destination[] = [];
   isLoggedIn = false;
+  username = '';
 
   constructor(private apiService: ApiService) {}
 
-  onLoggedIn() { 
-    this.isLoggedIn = true;
+  onLoggedIn(username: string) {
+  this.isLoggedIn = true;
+  this.username = username;
   }
-  
   
   onPref(pref: Preference) {
     this.apiService.postRecommendations(pref).subscribe({

@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sqlite3
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -55,30 +56,34 @@ def login():
             return jsonify({"message": "Login successful"}), 200
         else:
             return jsonify({"error": "Invalid credentials"}), 401
-
-# Ausgewählte Orte SPEICHERN
-@app.route('/users/<username>/places', methods=['POST'])
-def save_places(username):
-    data = request.get_json()
-    selected_places = ','.join(data.get('places', []))
-    with get_db() as db:
-        res = db.execute("UPDATE users SET selected_places=? WHERE username=?", (selected_places, username))
-        if res.rowcount:
-            return jsonify({"message": "Places saved"}), 200
-        else:
-            return jsonify({"error": "User not found"}), 404
-
-# Ausgewählte Orte ABRUFEN
+        
 @app.route('/users/<username>/places', methods=['GET'])
 def get_places(username):
     with get_db() as db:
         user = db.execute("SELECT selected_places FROM users WHERE username=?", (username,)).fetchone()
-        if user:
-            # Rückgabe als Liste
-            places = user["selected_places"].split(',') if user["selected_places"] else []
-            return jsonify({"places": places}), 200
-        else:
+        if not user:
             return jsonify({"error": "User not found"}), 404
+        if not user["selected_places"]:
+            places = []
+        else:
+            places = json.loads(user["selected_places"])
+        return jsonify({"places": places}), 200
+
+@app.route('/users/<username>/places', methods=['POST'])
+def save_places(username):
+    data = request.get_json()
+    places = data.get('places', [])
+    if not isinstance(places, list):
+        return jsonify({"error": "Places must be a list"}), 400
+    with get_db() as db:
+        user = db.execute("SELECT id FROM users WHERE username=?", (username,)).fetchone()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        db.execute(
+            "UPDATE users SET selected_places=? WHERE username=?",
+            (json.dumps(places), username)
+        )
+    return jsonify({"message": "Places saved"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

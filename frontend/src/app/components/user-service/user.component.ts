@@ -10,6 +10,7 @@ import { Output, EventEmitter } from '@angular/core';
   imports: [CommonModule, FormsModule],
   templateUrl: './user.component.html',
 })
+
 export class UserComponent {
   username = '';
   password = '';
@@ -18,13 +19,13 @@ export class UserComponent {
   message = '';
 
   constructor(private userService: ApiService) {};
-  @Output() loggedIn = new EventEmitter<void>();
-
+  @Output() loggedIn = new EventEmitter<string>();
+  
   register() {
     this.userService.register(this.username, this.password).subscribe({
       next: (res: any) => {
         this.message = res.message;
-        this.loggedIn.emit();
+        this.loggedIn.emit(this.username);
       },
       error: (err: any) => this.message = err.error.error
     });
@@ -34,29 +35,11 @@ export class UserComponent {
     this.userService.login(this.username, this.password).subscribe({
       next: (res: any) => {
         this.message = res.message;
-        this.fetchPlaces();
-        this.loggedIn.emit();
+        this.loggedIn.emit(this.username);
       },
       error: (err: any) => this.message = err.error.error
     });
   }
 
-  fetchPlaces() {
-    if (!this.username) return;
-    this.userService.getPlaces(this.username).subscribe({
-      next: (res: any) => this.userPlaces = res.places,
-      error: (err: any) => this.message = err.error.error
-    });
-  }
-
-  savePlaces() {
-    if (!this.username) return;
-    this.userService.savePlaces(this.username, this.places).subscribe({
-      next: (res: any) => {
-        this.message = res.message;
-        this.fetchPlaces();
-      },
-      error: (err: any) => this.message = err.error.error
-    });
-  }
+  
 }

@@ -26,3 +26,13 @@
 <br />
 
 <button (click)="submitForm()">Empfehlung holen</button>
+
+<hr>
+<h3>Lieblingsorte speichern:</h3>
+<input [(ngModel)]="placesText" placeholder="Paris, London" />
+<button (click)="savePlaces()">Orte speichern</button>
+
+<h4>Deine Orte:</h4>
+<ul>
+  <li *ngFor="let p of userPlaces">{{ p }}</li>
+</ul>

@@ -21,3 +21,4 @@ def get_recommendations():
         recommendations.append({"location": "Tokyo", "reason": "High-budget adventure", "budget": budget})
 
     return jsonify({"recommendations": recommendations})
+

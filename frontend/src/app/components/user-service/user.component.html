@@ -6,14 +6,4 @@
 
 <p *ngIf="message">{{ message }}</p>
 
-<hr>
-<h3>Save Favorite Places (comma separated):</h3>
-<input [(ngModel)]="places" placeholder="Paris,London" (ngModelChange)="places = $event.split(',')" />
-<button (click)="savePlaces()">Save Places</button>
 
-<hr>
-<h3>Your Places:</h3>
-<ul>
-  <li *ngFor="let place of userPlaces">{{ place }}</li>
-</ul>
-<hr>

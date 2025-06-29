@@ -29,10 +29,6 @@ export class ApiService {
   }
 
   // Recommendation service methods
-  getRecommendations(): Observable<any> {
-    return this.http.get(`${environment.recommenderApiBaseUrl}/recommendations`);
-  }
-
   postRecommendations(pref: Preference): Observable<Destination[]> {
     return this.http
       .post<{ recommendations: Destination[] }>(
