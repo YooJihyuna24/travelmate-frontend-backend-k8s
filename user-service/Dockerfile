@@ -1,18 +1,13 @@
-# Basis-Image
-FROM python:3.10-slim
+FROM python:3.10-slim-bullseye
 
-# Arbeitsverzeichnis setzen
-WORKDIR /user_service
+WORKDIR /app
 
-# requirements.txt und app.py kopieren
 COPY requirements.txt .
-COPY app.py .
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends gcc && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apt-get purge -y --auto-remove gcc && \
+    rm -rf /var/lib/apt/lists/*
 
-# Abhängigkeiten installieren
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
 
-# Exponiere Port 5000
-EXPOSE 5000
-
-# Starte die Flask-App
-CMD ["python", "app.py"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5001"]

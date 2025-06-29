@@ -1,3 +1,10 @@
 <h1>Reiseempfehlung</h1>
-<app-preference-form (preferenceSubmitted)="onPref($event)"></app-preference-form>
-<app-destination-list [list]="destinations"></app-destination-list>
+<app-user-service 
+  *ngIf="!isLoggedIn"
+  (loggedIn)="onLoggedIn($event)">
+</app-user-service>
+
+<div *ngIf="isLoggedIn">
+  <app-preference-form [username] = "username" (preferenceSubmitted)="onPref($event)"></app-preference-form>
+  <app-destination-list [list]="destinations"></app-destination-list>
+</div>

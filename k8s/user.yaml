@@ -27,6 +27,7 @@ spec:
       containers:
         - name: user
           image: <your-username>/user-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5001
           resources:
