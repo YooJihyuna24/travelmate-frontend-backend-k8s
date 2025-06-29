@@ -10,20 +10,24 @@ A simple travel recommendation system using Angular frontend, Flask backend, Doc
 - Docker
 - Kubernetes
 
+make sure to enable Kubernetes in Docker Desktop!
+
 ## Quickstart
 
 ```bash
 # Clone this repository
-git clone https://github.com/your-username/travelmate-app.git
-cd travelmate-app
+git clone https://github.com/yoojihyuna24/travelmate-frontend-backend-k8s.git
+cd travelmate-frontend-backend-k8s
 ```
 
 ## Project Structure
 
-frontend/           # Angular Frontend
-backend/            # Flask User-Service
-recommender/        # Flask Recommender-Service
-k8s/                # Kubernetes manifests (deployments & services)
+| Folder               | Description                                  |
+|----------------------|----------------------------------------------|
+| frontend/            | Angular Frontend                             |
+| user-serivce/        | Flask User-Service                           |
+| recommender-service/ | Flask Recommender-Service                    |
+| k8s/                 | Kubernetes manifests (deployments & services)|
 
 ## Prerequisites
 
@@ -44,13 +48,10 @@ npm install
 npm start
 ```
 
-## Backend & Recommender
-
-Refer to README in user/ and recommender/ folders for details on running locally.
-
 # Building and pushing Docker Images
 
 Replace <dockerhub-username> with your Docker Hub username:
+Replace <your-username> in all .yaml Files!!!
 
 ```bash
 # Frontend

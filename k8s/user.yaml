@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: user
-          image: yoojihyuna24/user-service:latest
+          image: <your-username>/user-service:latest
           ports:
             - containerPort: 5001
           resources:
