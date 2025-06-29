@@ -4,4 +4,4 @@ export const environment = {
   recommenderApiBaseUrl:'http://localhost:5002',
   userApiBaseUrl: 'http://localhost:5001'
 };
->>>>>>> origin/main
+
