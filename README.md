@@ -10,20 +10,24 @@ A simple travel recommendation system using Angular frontend, Flask backend, Doc
 - Docker
 - Kubernetes
 
+make sure to enable Kubernetes in Docker Desktop!
+
 ## Quickstart
 
 ```bash
 # Clone this repository
-git clone https://github.com/your-username/travelmate-app.git
-cd travelmate-app
+git clone https://github.com/yoojihyuna24/travelmate-frontend-backend-k8s.git
+cd travelmate-frontend-backend-k8s
 ```
 
 ## Project Structure
 
-frontend/           # Angular Frontend
-backend/            # Flask User-Service
-recommender/        # Flask Recommender-Service
-k8s/                # Kubernetes manifests (deployments & services)
+| Folder               | Description                                  |
+|----------------------|----------------------------------------------|
+| frontend/            | Angular Frontend                             |
+| user-serivce/        | Flask User-Service                           |
+| recommender-service/ | Flask Recommender-Service                    |
+| k8s/                 | Kubernetes manifests (deployments & services)|
 
 ## Prerequisites
 
@@ -44,36 +48,35 @@ npm install
 npm start
 ```
 
-## Backend & Recommender
-
-Refer to README in backend/ and recommender/ folders for details on running locally.
-
 # Building and pushing Docker Images
 
 Replace <dockerhub-username> with your Docker Hub username:
+Replace <your-username> in all .yaml Files!!!
 
 ```bash
 # Frontend
-docker build -t thilofritz/frontend:latest ./frontend
-docker push thilofritz/frontend:latest
-kubectl rollout restart deployment frontend-deployment
+cd frontend
+docker build -t <dockerhub-username>/frontend:latest .
+docker push <dockerhub-username>/frontend:latest
 
 # User Service (Backend)
-docker build -t thilofritz/user-service:latest ./user-service
-docker push thilofritz/user-service:latest
-kubectl rollout restart deployment user-deployment
+cd ..
+cd user-service
+docker build -t <dockerhub-username>/user-service:latest .
+docker push <dockerhub-username>/user-service:latest
 
 # Recommender Service
-docker build -t thilofritz/recommender-service:latest ./recommender-service
-docker push thilofritz/recommender-service:latest
-kubectl rollout restart deployment recommender-deployment
+cd ..
+cd recommender-service
+docker build -t <dockerhub-username>/recommender-service:latest .
+docker push <dockerhub-username>/recommender-service:latest
 ```
 
 ## Deploying to Kubernetes
 
 ```bash
 # Apply all manifests:
-kubectl apply -f k8s/
+kubectl apply -f k8s
 # Check pod and service status:
 kubectl get pods
 kubectl get svc

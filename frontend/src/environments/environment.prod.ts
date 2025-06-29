@@ -1,5 +1,7 @@
+// filepath: [environment.prod.ts](http://_vscodecontentref_/0)
 export const environment = {
   production: true,
-  userApiBaseUrl: 'http://user-service:80',
-  recommenderApiBaseUrl: 'http://recommender-service:80'
+  recommenderApiBaseUrl:'http://localhost:5002',
+  userApiBaseUrl: 'http://localhost:5001'
 };
+>>>>>>> origin/main

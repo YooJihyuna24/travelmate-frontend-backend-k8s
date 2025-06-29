@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 
 export class ApiService {
+
   constructor(private http: HttpClient) {}
 
   // *** User-Service Endpunkte ***

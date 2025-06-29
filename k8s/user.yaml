@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: user
-          image: thilofritz/user-service:latest
+          image: <your-username>/user-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5001

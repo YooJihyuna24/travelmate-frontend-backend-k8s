@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: thilofritz/frontend:latest
+          image: <your-username>/frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
