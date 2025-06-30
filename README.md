@@ -50,8 +50,9 @@ npm start
 
 # Building and pushing Docker Images
 
+Replace <your-username> in all .yaml Files to your Docker Hub  username!!!
+
 Replace <dockerhub-username> with your Docker Hub username:
-Replace <your-username> in all .yaml Files!!!
 
 ```bash
 # Frontend
@@ -59,7 +60,7 @@ cd frontend
 docker build -t <dockerhub-username>/frontend:latest .
 docker push <dockerhub-username>/frontend:latest
 
-# User Service (Backend)
+# User Service
 cd ..
 cd user-service
 docker build -t <dockerhub-username>/user-service:latest .
@@ -83,7 +84,9 @@ kubectl get svc
 # Accessing the Services Locally via Port-Forward
 kubectl port-forward svc/frontend-service 4200:80
 kubectl port-forward svc/user-service 5001:80
-kubectl port-forward svc/recommender-service 5002:80
+kubectl port-forward svc/recommender-service 5002:5002
+# In case of reloading:
+kubectl rollout restart deployment 
 ```
 
 Frontend UI: http://localhost:4200
