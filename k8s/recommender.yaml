@@ -27,6 +27,7 @@ spec:
       containers:
         - name: recommender
           image: <your-username>/recommender:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5002
           resources:

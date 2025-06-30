@@ -7,23 +7,36 @@ import { Destination } from '../models/destination';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
+
 export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getRecommendations(): Observable<any> {
-    return this.http.get(`${environment.recommenderApiBaseUrl}`);
+  // *** User-Service Endpunkte ***
+  register(username: string, password: string): Observable<any> {
+    return this.http.post(`${environment.userApiBaseUrl}/users/register`, { username, password });
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(`${environment.userApiBaseUrl}`);
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${environment.userApiBaseUrl}/users/login`, { username, password });
   }
 
-  // NEU: Post Recommendations mit User-Preferences
+  getPlaces(username: string): Observable<any> {
+    return this.http.get(`${environment.userApiBaseUrl}/users/${username}/places`);
+  }
+
+  savePlaces(username: string, places: string[]): Observable<any> {
+    return this.http.post(`${environment.userApiBaseUrl}/users/${username}/places`, { places });
+  }
+
+  // Recommendation service methods
   postRecommendations(pref: Preference): Observable<Destination[]> {
-    return this.http.post<{ recommendations: Destination[] }>(
-      `${environment.recommenderApiBaseUrl}/recommendations`,
-      pref
-    ).pipe(map(response => response.recommendations));
+    return this.http
+      .post<{ recommendations: Destination[] }>(
+        `${environment.recommenderApiBaseUrl}/recommendations`,
+        pref
+      )
+      .pipe(map(response => response.recommendations));
   }
 }
+
