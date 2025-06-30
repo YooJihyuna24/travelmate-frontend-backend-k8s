@@ -59,18 +59,19 @@ Replace <dockerhub-username> with your Docker Hub username:
 cd frontend
 docker build -t <dockerhub-username>/frontend:latest .
 docker push <dockerhub-username>/frontend:latest
+cd ..
 
 # User Service
-cd ..
 cd user-service
 docker build -t <dockerhub-username>/user-service:latest .
 docker push <dockerhub-username>/user-service:latest
+cd ..
 
 # Recommender Service
-cd ..
 cd recommender-service
 docker build -t <dockerhub-username>/recommender-service:latest .
 docker push <dockerhub-username>/recommender-service:latest
+cd ..
 ```
 
 ## Deploying to Kubernetes
@@ -82,6 +83,7 @@ kubectl apply -f k8s
 kubectl get pods
 kubectl get svc
 # Accessing the Services Locally via Port-Forward
+# Open each command in a seperate terminal!
 kubectl port-forward svc/frontend-service 4200:80
 kubectl port-forward svc/user-service 5001:80
 kubectl port-forward svc/recommender-service 5002:5002
